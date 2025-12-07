@@ -201,11 +201,12 @@ if __name__ == "__main__":
     # Wait for pick to actually finish before proceeding
     wait_for_pick_finish(PICK_TIMEOUT)
 
+    clear_costmaps()
+
     # Brief spin to help AMCL converge if odom slipped during pick
     spin_robot()
     amcl_cov_ok = False
     wait_for_localization(LOCALIZATION_TIMEOUT_AFTER_PICK)
-    clear_costmaps()
 
     # Step 2: go to DROP1
     send_actionlib_goal(*WAYPOINT_DROP1)
