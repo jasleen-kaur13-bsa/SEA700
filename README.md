@@ -4,7 +4,7 @@ This workspace carries a single `jetauto_example` scenario: drive to a pick stat
 
 
 ## Files to edit
-To get started, edit the following files in the "jetauto_ws":
+To get started, edit the following files in the "jetauto_ws". The jetauto_ws is already present on the robot.
 
 - `src/jetauto_example/scripts/navigation_transport/navigation_transport.launch`: 
   - Point the `map` argument to your map YAML and adjust `robot_name`/`master_name` if you use TF prefixes.
