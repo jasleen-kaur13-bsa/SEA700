@@ -1,0 +1,30 @@
+<launch>
+
+    <!-- 1. Start robot hardware + TF + lidar + controllers -->
+    <include file="$(find jetauto_slam)/launch/include/jetauto_robot.launch">
+        <arg name="robot_name" value="/"/>
+        <arg name="master_name" value="/"/>
+        <arg name="set_pose" value="false"/>
+    </include>
+
+    <!-- 2. Load map -->
+    <include file="$(find jetauto_navigation)/launch/include/load_map.launch">
+        <arg name="robot_name" value="/"/>
+        <arg name="map" value="/home/jetauto/map.yaml"/>
+    </include>
+
+    <!-- 3. Start AMCL + move_base + costmaps -->
+    <include file="$(find jetauto_navigation)/launch/include/navigation_base.launch">
+        <arg name="robot_name" value="/"/>
+        <arg name="master_name" value="/"/>
+    </include>
+
+    <!-- 4. Start automatic_pick (vision + arm control) -->
+    <node pkg="jetauto_example" type="automatic_pick.py" name="automatic_pick" output="screen"/>
+
+    <!-- 6. Start RViz with correct config -->
+    <node pkg="rviz" type="rviz" name="rviz"
+          args="-d $(find jetauto_example)/rviz/navigation_transport.rviz"
+          output="screen"/>
+
+</launch>
